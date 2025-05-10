@@ -1,0 +1,27 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "Bod zájmu – Praha" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [14.4378, 50.0755]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Oblast v Praze" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [14.43, 50.07],
+          [14.44, 50.07],
+          [14.44, 50.08],
+          [14.43, 50.08],
+          [14.43, 50.07]
+        ]]
+      }
+    }
+  ]
+}
