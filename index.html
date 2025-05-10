@@ -22,72 +22,72 @@
       attribution: '© OpenStreetMap přispěvatelé'
     }).addTo(map);
 
+    const map = L.map('map').setView([50.0755, 14.4378], 13); // Praha
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap přispěvatelé'
+    }).addTo(map);
+
+    // Ukázkové GeoJSON data (např. bod + polygon)
+    const geojsonData = {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": { "name": "Bod zájmu" },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [14.4378, 50.0755]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": { "name": "Oblast" },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[
+              [14.43, 50.07],
+              [14.44, 50.07],
+              [14.44, 50.08],
+              [14.43, 50.08],
+              [14.43, 50.07]
+            ]]
+          }
+        }
+      ]
+    };
+
+    // Přidání GeoJSON vrstvy do mapy
+    L.geoJSON(geojsonData, {
+      onEachFeature: function (feature, layer) {
+        if (feature.properties && feature.properties.name) {
+          layer.bindPopup(feature.properties.name);
+        }
+      },
+      style: function(feature) {
+        return {
+          color: "blue",
+          weight: 2,
+          fillOpacity: 0.4
+        };
+      },
+      pointToLayer: function(feature, latlng) {
+        return L.circleMarker(latlng, {
+          radius: 8,
+          fillColor: "#f03",
+          color: "#000",
+          weight: 1,
+          opacity: 1,
+          fillOpacity: 0.8
+        });
+      }
+    }).addTo(map);
+
     L.marker([50.0755, 14.4378])
       .addTo(map)
       .bindPopup('Tady je Praha!')
       .openPopup();
   </script>
-  <script>
-  const map = L.map('map').setView([50.0755, 14.4378], 13); // Praha
-
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap přispěvatelé'
-  }).addTo(map);
-
-  // Ukázkové GeoJSON data (např. bod + polygon)
-  const geojsonData = {
-    "type": "FeatureCollection",
-    "features": [
-      {
-        "type": "Feature",
-        "properties": { "name": "Bod zájmu" },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [14.4378, 50.0755]
-        }
-      },
-      {
-        "type": "Feature",
-        "properties": { "name": "Oblast" },
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [[
-            [14.43, 50.07],
-            [14.44, 50.07],
-            [14.44, 50.08],
-            [14.43, 50.08],
-            [14.43, 50.07]
-          ]]
-        }
-      }
-    ]
-  };
-
-  // Přidání GeoJSON vrstvy do mapy
-  L.geoJSON(geojsonData, {
-    onEachFeature: function (feature, layer) {
-      if (feature.properties && feature.properties.name) {
-        layer.bindPopup(feature.properties.name);
-      }
-    },
-    style: function(feature) {
-      return {
-        color: "blue",
-        weight: 2,
-        fillOpacity: 0.4
-      };
-    },
-    pointToLayer: function(feature, latlng) {
-      return L.circleMarker(latlng, {
-        radius: 8,
-        fillColor: "#f03",
-        color: "#000",
-        weight: 1,
-        opacity: 1,
-        fillOpacity: 0.8
-      });
-    }
-  }).addTo(map);
-</script>
+  
 </body>
 </html>
